@@ -1,0 +1,34 @@
+﻿@model Sohbet.VMmodels.VMLogin
+@using (Html.BeginForm("Login", "Page", FormMethod.Post))
+{
+    <div class=" align-content-sm-start" style="position:relative;left:300%;border-radius:10px;border:1px;">
+        <table>
+            <tr>
+                <td>
+                    Username
+                </td>
+                <td>
+                    @Html.TextBoxFor(m => m.UserName)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Password:
+                </td>
+                <td>
+                    @Html.TextBoxFor(m => m.Password)
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2"><input type="submit" value="Login" /></td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.ActionLink("Şifremi Unuttum","Forgot","Page")
+                </td>
+                <td>
+
+                </td>
+            </tr>
+        </table>
+    </div>      }

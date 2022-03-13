@@ -1,0 +1,94 @@
+﻿@using Models
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Online Chat</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/modernizr-2.8.3.js"></script>
+</head>
+<body onload="Show();">
+    <ul class="nav justify-content-end">
+        <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/Page/Home">Home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/Page/About">About</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/Page/Contact">Contact</a>
+        </li>
+    </ul>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("NETWORK AKADEMİ", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @if (Session["ID"] == null)
+                {
+                    @Html.Action("Login")
+                }
+
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                </ul>
+            </div>
+        </div>
+    </div>
+    @if (Session["ID"] != null)
+    {
+
+        <div class="navbar-nav-scroll">
+            @foreach (User user in ((List<User>)TempData["Users"]))
+            {
+                <button class="btn-primary" value="@user.UserID">@user.UserName</button>
+            }
+        </div>
+    }
+    <div class="container body-content">
+
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</body>
+</html>
+<style>
+    body{
+        background-color:beige;
+        background:url('../../image/banner.jpg');
+    }
+</style>
+<script>
+    function Show() {
+        personMessage();
+    }
+    function personMessage() {
+        var btnUser = document.getElementsByClassName("btn-primary");
+        for (var i = 0; i < btnUser.length; i++) {
+            btnUser[i].addEventListener("click", function () {
+                factorySettings();
+                this.style.backgroundColor = "Red";
+
+            });
+        }
+    }
+    function factorySettings() {
+        var btnUser = document.getElementsByClassName("btn-primary");
+        for (var i = 0; i < btnUser.length; i++) {
+            btnUser[i].style.backgroundColor = "Blue";
+        }
+    }
+</script>
