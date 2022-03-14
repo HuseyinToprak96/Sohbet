@@ -46,6 +46,7 @@ namespace Sohbet.Controllers
             {
                 Session["ID"] = user.UserID;
                 Session["Status"] = user.status;
+                Session.Timeout=2;
             }
             else
             {

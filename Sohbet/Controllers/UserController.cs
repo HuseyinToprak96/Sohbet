@@ -14,7 +14,6 @@ namespace Sohbet.Controllers
         // GET: User
         public ActionResult Index()
         {
-          
             return View();
         }
         [HttpPost]
@@ -28,21 +27,25 @@ namespace Sohbet.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Forgot(int id)
+        public ActionResult Forgot(string eposta)
         {
             return View();
         }
-        public ActionResult MyProfile(int id)
+        public ActionResult MyProfile()
         {
-            return View();
+            int id = Convert.ToInt32(Session["ID"]);
+            return View(setting.List().Where(u=>u.UserID==id).SingleOrDefault());
         }
-        public ActionResult Settings(int id)
+        public ActionResult Settings()
         {
-            return View();
+            int id = Convert.ToInt32(Session["ID"]);
+            return View(setting.List().Where(u => u.UserID == id).SingleOrDefault());
         }
         [HttpPost]
-        public ActionResult Settings(string id)
+        public ActionResult Settings(User user)
         {
+            setting.Add(user);
+            Session.Abandon();
             return View();
         }
     }
