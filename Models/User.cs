@@ -19,6 +19,7 @@ namespace Models
         public string Mail { get; set; }
         public bool Approval { get; set; }
         public bool status { get; set; }
+        //NAV
         public virtual List<Message> messages { get; set; }
     }
 }

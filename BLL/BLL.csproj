@@ -65,10 +65,17 @@
       <Project>{03160711-8cd1-4fb6-9df4-7a970f202caa}</Project>
       <Name>Models</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Repository\RepositoryLayer.csproj">
+      <Project>{dd272a1c-8c57-4ecc-9a2f-c2b9d139b514}</Project>
+      <Name>RepositoryLayer</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

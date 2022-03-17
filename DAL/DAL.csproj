@@ -51,7 +51,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ICRUD.cs" />
     <Compile Include="init.cs" />
     <Compile Include="Context.cs" />
     <Compile Include="MessageSettings.cs" />

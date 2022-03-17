@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-   public class UserSettings<User> :ICRUD<User> where User:class
+   public class UserSettings<User> //:IRepo
     {
         Context db = new Context();
         

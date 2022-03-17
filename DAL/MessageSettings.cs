@@ -6,7 +6,7 @@ using System.Text;
 
 namespace DAL
 {
-   public class MessageSettings<Message> : ICRUD<Message> where Message : class
+   public class MessageSettings<Messages>//:IRepositoryMessages<Messages>
     {
         Context db = new Context();
 
