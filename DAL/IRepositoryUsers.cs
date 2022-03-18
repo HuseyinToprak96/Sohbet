@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Models;
-namespace RepositoryLayer
+namespace DAL
 {
-   public interface IRepositoryUsers<T>
+   public interface IRepositoryUsers<User>
     {
         void SignUp(User user);
         List<User> Users();

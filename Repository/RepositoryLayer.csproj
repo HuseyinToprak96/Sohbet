@@ -42,8 +42,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IRepository.cs" />
-    <Compile Include="IRepositoryUsers.cs" />
-    <Compile Include="IRepositoryMessages.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository.cs" />
   </ItemGroup>

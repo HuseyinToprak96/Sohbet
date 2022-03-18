@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 namespace RepositoryLayer
 {
   public class Repository<T> :IRepository<T>
@@ -26,12 +25,12 @@ namespace RepositoryLayer
 
         public User FindUser(int id)
         {
-            return repository.FindUser(id);
+           return repository.FindUser(id);
         }
 
         public List<Message> Messages()
         {
-          return  repository.Messages();
+            return repository.Messages().ToList();
         }
 
         public void SendMessage(Message message)
@@ -51,7 +50,7 @@ namespace RepositoryLayer
 
         public List<User> Users()
         {
-            return repository.Users();
+            return repository.Users().ToList();
         }
     }
 }

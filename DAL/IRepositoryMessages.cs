@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Models;
-namespace RepositoryLayer
+namespace DAL
 {
-   public interface IRepositoryMessages<T>
+   public interface IRepositoryMessages<Message>
     {
         void SendMessage(Message message);
         void DeleteMessage(int id);

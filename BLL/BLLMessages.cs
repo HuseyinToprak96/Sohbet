@@ -5,29 +5,32 @@ using System.Text;
 using System.Threading.Tasks;
 using DAL;
 using Models;
+using RepositoryLayer;
 namespace BLL
 {
-   public class BLLMessages<T> : ICRUD<T> where T : class
+   public class BLLMessages<Message> 
     {
-        MessageSettings<T> settings = new MessageSettings<T>();
-        public void Add(T t)
+        MessageSettings<Message> messageSettings = new MessageSettings<Message>();
+        public void Add(Message message)
         {
-          
-        }
+            IRepository<Message> msj = (messageSettings as IRepository<Message>) as IRepository<Message>;
+            Models.Message m = (message as Models.Message) as Models.Message;
+            Repository<Message> repository = new Repository<Message>(msj);
+            repository.SendMessage(m);
+                }
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            IRepository<Message> msj = (messageSettings as IRepository<Message>) as IRepository<Message>;
+            Repository<Message> repository = new Repository<Message>(msj);
+            repository.DeleteMessage(id);
         }
 
-        public List<T> List()
+        public List<Models.Message> List()
         {
-            throw new NotImplementedException();
-        }
-
-        public void Update(T t)
-        {
-            throw new NotImplementedException();
+            IRepository<Message> msj = (messageSettings as IRepository<Message>) as IRepository<Message>;
+            Repository<Message> repository = new Repository<Message>(msj);
+            return repository.Messages();
         }
     }
 }

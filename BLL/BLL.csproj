@@ -51,7 +51,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ICRUD.cs" />
     <Compile Include="BLLMessages.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BLLUser.cs" />

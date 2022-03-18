@@ -4,39 +4,32 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 namespace DAL
 {
-   public class UserSettings<User> //:IRepo
+   public class UserSettings:IRepositoryUsers<User>
     {
         Context db = new Context();
-        
-        public void Add(User t)
-        {
-            Models.User user = new Models.User();
-            db.Users.Add(user);
-            db.SaveChanges();
-        }
-        public void Delete(int id)
+        public void DeleteUser(int id)
         {
             db.Users.Remove(db.Users.Where(u => u.UserID == id).SingleOrDefault());
             db.SaveChanges();
         }
-        public List<User> Find(int id)
+        public User FindUser(int id)
         {
-            List<User> User = db.Users.Where(u => u.UserID == id).ToList() as List<User>;
-            return User;
+            var user = db.Users.Where(u => u.UserID == id).SingleOrDefault();
+            User us = (user as User) as User;
+            return us;
+        }
+        public void SignUp(User user)
+        {
+            Models.User us = (user as Models.User) as Models.User;
+            db.Users.Add(us);
+            db.SaveChanges();
         }
 
-        public List<User> List()
+        public void UpdateUser(User use)
         {
-            List<User> List=db.Users.ToList() as List<User>;
-            return List;
-        }
-
-        public void Update(User t)
-        {
-            Models.User user = t as Models.User;
+            Models.User user = use as Models.User;
             var result = db.Users.Where(u => u.UserID == user.UserID).SingleOrDefault();
             result.UserName = user.UserName;
             result.FirstName = user.FirstName;
@@ -49,5 +42,10 @@ namespace DAL
             db.SaveChanges();
         }
 
+        public List<User> Users()
+        {
+            List<User> List = db.Users.ToList() as List<User>;
+            return List;
+        }
     }
 }
