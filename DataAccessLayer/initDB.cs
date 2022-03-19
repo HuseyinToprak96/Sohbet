@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Web;
-using Models;
 using System.Data.Entity;
-namespace DAL
+using Models;
+namespace DataAccessLayer
 {
-    public class init:DropCreateDatabaseAlways<Context>
+    class initDB:DropCreateDatabaseAlways<Context>
     {
         protected override void Seed(Context context)
         {

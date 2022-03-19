@@ -51,10 +51,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Icrud.cs" />
     <Compile Include="init.cs" />
     <Compile Include="Context.cs" />
-    <Compile Include="IRepositoryMessages.cs" />
-    <Compile Include="IRepositoryUsers.cs" />
     <Compile Include="MessageSettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserSettings.cs" />

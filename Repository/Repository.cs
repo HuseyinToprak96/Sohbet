@@ -4,53 +4,39 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DAL;
 namespace RepositoryLayer
 {
-  public class Repository<T> :IRepository<T>
+  public class Repository<T> :Icrud<T> 
     {
-        IRepository<T> repository;
-        public Repository(IRepository<T> DB)
+        Icrud<T> repository;
+        public Repository(Icrud<T> DB)
         {
             repository = DB;
         }
-        public void DeleteMessage(int id)
+
+        public void Add(T t)
         {
-            repository.DeleteMessage(id);
+            repository.Add(t);
         }
 
-        public void DeleteUser(int id)
+        public void Delete(int id)
         {
-            repository.DeleteUser(id);
+            repository.Delete(id);
         }
 
-        public User FindUser(int id)
+        public T Find(int id)
         {
-           return repository.FindUser(id);
+            return repository.Find(id);
         }
 
-        public List<Message> Messages()
+        public List<T> List()
         {
-            return repository.Messages().ToList();
+            return repository.List();
         }
-
-        public void SendMessage(Message message)
+        public void Update(T t)
         {
-            repository.SendMessage(message);
-        }
-
-        public void SignUp(User user)
-        {
-            repository.SignUp(user);
-        }
-
-        public void UpdateUser(User user)
-        {
-            repository.UpdateUser(user);
-        }
-
-        public List<User> Users()
-        {
-            return repository.Users().ToList();
+            repository.Update(t);
         }
     }
 }

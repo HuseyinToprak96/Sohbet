@@ -45,15 +45,16 @@
     @if (Session["ID"] != null)
     {
 
-        <div class="navbar-nav-scroll">
+        <div class="userList">
             @foreach (User user in ((List<User>)TempData["Users"]))
             {
                 <button class="btn-primary" value="@user.UserID">@user.UserName</button>
+                <br />
             }
         </div>
     }
-    <div class="container body-content">
-
+    <div class="containerRender">
+        dsadasds
         @RenderBody()
         <hr />
         <footer>
@@ -92,3 +93,14 @@
         }
     }
 </script>
+<style>
+    .userList{
+        position:relative;
+        height:max-content;
+        background-color:beige;
+        width:max-content;
+    }
+    .containerRender{
+        background-color:antiquewhite;
+    }
+</style>

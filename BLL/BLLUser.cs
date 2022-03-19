@@ -9,34 +9,33 @@ namespace BLL
 {
    public class BLLUser<User>
     {
-        UserSettings userSettings = new UserSettings();
+        UserSettings<User> userSettings = new UserSettings<User>();
+        Repository<User> repository;
+        public BLLUser()
+        {
+            repository = new Repository<User>(userSettings);
+        }
         public void Add(User user)
         {
-            IRepository<User> us = (userSettings as IRepository<User>) as IRepository<User>;
-           Models.User u = (user as Models.User) as Models.User;
-            Repository<User> repository = new Repository<User>(us);
-            repository.SignUp(u);
+           repository.Add(user);
         }
 
         public void Delete(int id)
         {
-            IRepository<User> us = (userSettings as IRepository<User>) as IRepository<User>;
-            Repository<User> repository = new Repository<User>(us);
-            repository.DeleteUser(id);
+           repository.Delete(id);
         }
 
-        public List<Models.User> List()
+        public List<User> List()
        {
-            IRepository<User> us = (userSettings as IRepository<User>) as IRepository<User>;
-            Repository<User> repository = new Repository<User>(us);
-            return repository.Users();
-      }
-
-        public void Update(Models.User user)
+            return repository.List();
+       }
+        public void Update(User user)
         {
-            IRepository<User> us = (userSettings as IRepository<User>) as IRepository<User>;
-            Repository<User> repository = new Repository<User>(us);
-            repository.UpdateUser(user);
+           repository.Update(user);
+        }
+        public User Find(int id)
+        {
+           return repository.Find(id);
         }
     }
 }

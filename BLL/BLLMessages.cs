@@ -13,24 +13,19 @@ namespace BLL
         MessageSettings<Message> messageSettings = new MessageSettings<Message>();
         public void Add(Message message)
         {
-            IRepository<Message> msj = (messageSettings as IRepository<Message>) as IRepository<Message>;
-            Models.Message m = (message as Models.Message) as Models.Message;
-            Repository<Message> repository = new Repository<Message>(msj);
-            repository.SendMessage(m);
-                }
-
+           Repository<Message> repository = new Repository<Message>(messageSettings);
+            repository.Add(message);
+        }
         public void Delete(int id)
         {
-            IRepository<Message> msj = (messageSettings as IRepository<Message>) as IRepository<Message>;
-            Repository<Message> repository = new Repository<Message>(msj);
-            repository.DeleteMessage(id);
+            Repository<Message> repository = new Repository<Message>(messageSettings);
+            repository.Delete(id);
         }
 
-        public List<Models.Message> List()
+        public List<Message> List()
         {
-            IRepository<Message> msj = (messageSettings as IRepository<Message>) as IRepository<Message>;
-            Repository<Message> repository = new Repository<Message>(msj);
-            return repository.Messages();
+            Repository<Message> repository = new Repository<Message>(messageSettings);
+            return repository.List() ;
         }
     }
 }

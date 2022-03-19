@@ -6,11 +6,12 @@ using System.Web.Mvc;
 using Sohbet.VMmodels;
 using BLL;
 using Models;
+using DAL;
 namespace Sohbet.Controllers
 {
     public class UserController : Controller
     {
-        BLLUser<User> setting = new BLLUser<User>();
+        BLLUser<User> Datas = new BLLUser<User>();
         // GET: User
         public ActionResult Index()
         {
@@ -19,7 +20,7 @@ namespace Sohbet.Controllers
         [HttpPost]
         public ActionResult SingUp(User user)
         {
-            setting.Add(user);
+            Datas.Add(user);
             return RedirectToAction("/Page/Home");
         }
         public ActionResult Forgot()
@@ -34,17 +35,17 @@ namespace Sohbet.Controllers
         public ActionResult MyProfile()
         {
             int id = Convert.ToInt32(Session["ID"]);
-            return View(setting.List().Where(u=>u.UserID==id).SingleOrDefault());
+            return View(Datas.Find(id));
         }
         public ActionResult Settings()
         {
             int id = Convert.ToInt32(Session["ID"]);
-            return View(setting.List().Where(u => u.UserID == id).SingleOrDefault());
+            return View(Datas.Find(id));
         }
         [HttpPost]
         public ActionResult Settings(User user)
         {
-            setting.Add(user);
+            Datas.Update(user);
             Session.Abandon();
             return View();
         }

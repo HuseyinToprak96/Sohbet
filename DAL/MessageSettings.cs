@@ -6,24 +6,49 @@ using System.Text;
 
 namespace DAL
 {
-   public class MessageSettings<Message>:IRepositoryMessages<Message>
+   public class MessageSettings<Message>:Icrud<Message>
     {
         Context db = new Context();
-        public void SendMessage(Message message)
+
+        public void Add(Message t)
         {
-            Models.Message mes = (message as Models.Message) as Models.Message;
-            db.Messages.Add(mes);
+            throw new NotImplementedException();
         }
 
-      public List<Message> Messages()
+        public void Delete(int id)
         {
-            List<Message> messagesList = db.Messages.ToList() as List<Message>;
-            return messagesList;
+            throw new NotImplementedException();
         }
-        public void DeleteMessage(int id)
+
+        public Message Find(int id)
         {
-            db.Messages.Remove(db.Messages.Where(m => m.MessageID == id).SingleOrDefault());
-            db.SaveChanges();
+            throw new NotImplementedException();
         }
+
+        public List<Message> List()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(Message t)
+        {
+            throw new NotImplementedException();
+        }
+        //  public void SendMessage(Message message)
+        //  {
+        //      Models.Message mes = (message as Models.Message) as Models.Message;
+        //      db.Messages.Add(mes);
+        //  }
+
+        //public List<Message> Messages()
+        //  {
+        //      List<Message> messagesList = db.Messages.ToList() as List<Message>;
+        //      return messagesList;
+        //  }
+        //  public void DeleteMessage(int id)
+        //  {
+        //      db.Messages.Remove(db.Messages.Where(m => m.MessageID == id).SingleOrDefault());
+        //      db.SaveChanges();
+        //  }
     }
 }
