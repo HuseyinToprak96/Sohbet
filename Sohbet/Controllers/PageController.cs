@@ -28,10 +28,12 @@ namespace Sohbet.Controllers
         }
         public ActionResult About()
         {
+            Users();
             return View();
         }
         public ActionResult Contact()
         {
+            Users();
             return View();
         }
         public ActionResult Login()

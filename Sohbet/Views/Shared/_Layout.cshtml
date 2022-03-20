@@ -29,7 +29,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("NETWORK AKADEMİ", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("İ'zdiv'acına Tali'bim", "Index", "Home", new { area = "" }, new { @class = "title" })
                 @if (Session["ID"] == null)
                 {
                     @Html.Action("Login")
@@ -42,23 +42,48 @@
             </div>
         </div>
     </div>
-    @if (Session["ID"] != null)
-    {
-
-        <div class="userList">
+    <div class="containerRender">
+        <div class="d-table-cell">
             @foreach (User user in ((List<User>)TempData["Users"]))
             {
-                <button class="btn-primary" value="@user.UserID">@user.UserName</button>
-                <br />
+            <a href="/User/Face/id=@user.UserID"> <img src="@user.Photo" height="50" width="50"  /></a>
             }
         </div>
-    }
-    <div class="containerRender">
-        dsadasds
-        @RenderBody()
         <hr />
+        <section>
+            <aside>
+                @if (Session["ID"] != null)
+                {
+
+                    <div class="userList">
+                        @foreach (User user in ((List<User>)TempData["Users"]))
+                        {
+                            <button class="btn-primary" value="@user.UserID">@user.UserName</button>
+                            <br />
+                        }
+                    </div>
+                }
+            </aside>
+            <article>
+                @RenderBody()
+            </article>
+        </section>
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <button type="button" class="btn btn-dark" id="liveToastBtn">Show live toast</button>
+
+            <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+                <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="toast-header">
+                        <img src="..." class="rounded me-2" alt="...">
+                        <strong class="me-auto">Bootstrap</strong>
+                        <small>11 mins ago</small>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body">
+                        Hello, world! This is a toast message.
+                    </div>
+                </div>
+            </div>
         </footer>
     </div>
 
@@ -70,6 +95,17 @@
     body{
         background-color:beige;
         background:url('../../image/banner.jpg');
+    }
+    section{
+        display:grid;
+       grid-template-columns:20% 80%;
+       grid-template:subgrid;
+    }
+    .title{
+       font-size:30px;
+       color:black;
+       font-weight:bold;
+       text-decoration:none;
     }
 </style>
 <script>
@@ -89,15 +125,15 @@
     function factorySettings() {
         var btnUser = document.getElementsByClassName("btn-primary");
         for (var i = 0; i < btnUser.length; i++) {
-            btnUser[i].style.backgroundColor = "Blue";
+            btnUser[i].className = "btn-primary";
         }
     }
+
 </script>
 <style>
     .userList{
         position:relative;
         height:max-content;
-        background-color:beige;
         width:max-content;
     }
     .containerRender{
