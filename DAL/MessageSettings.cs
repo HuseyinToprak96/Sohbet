@@ -10,14 +10,16 @@ namespace DAL
     {
         Context db = new Context();
 
-        public void Add(Message t)
+        public void Add(Message message)
         {
-            throw new NotImplementedException();
+            Models.Message mes = (message as Models.Message) as Models.Message;
+            db.Messages.Add(mes);
         }
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            db.Messages.Remove(db.Messages.Where(m => m.MessageID == id).SingleOrDefault());
+            db.SaveChanges();
         }
 
         public Message Find(int id)
@@ -25,30 +27,27 @@ namespace DAL
             throw new NotImplementedException();
         }
 
+        //public Message Find(int id)
+        // {
+        //    var mes = db.Messages.ToList().Where(m=>m.MessageID==id).SingleOrDefault();
+        //     Message message = mes as Message;
+        //     return message;
+        // }
+
         public List<Message> List()
         {
-            throw new NotImplementedException();
+            List<Message> messagesList = db.Messages.ToList() as List<Message>;
+            return messagesList;
         }
 
-        public void Update(Message t)
+        public void Update(Message message)
         {
-            throw new NotImplementedException();
+            Models.Message sms = message as Models.Message;
+            var mes = db.Messages.Where(m => m.MessageID == sms.MessageID).SingleOrDefault();
+            mes.MessageContent = sms.MessageContent;
+            mes.Date = sms.Date;
+            db.SaveChanges();
         }
-        //  public void SendMessage(Message message)
-        //  {
-        //      Models.Message mes = (message as Models.Message) as Models.Message;
-        //      db.Messages.Add(mes);
-        //  }
-
-        //public List<Message> Messages()
-        //  {
-        //      List<Message> messagesList = db.Messages.ToList() as List<Message>;
-        //      return messagesList;
-        //  }
-        //  public void DeleteMessage(int id)
-        //  {
-        //      db.Messages.Remove(db.Messages.Where(m => m.MessageID == id).SingleOrDefault());
-        //      db.SaveChanges();
-        //  }
+    
     }
 }

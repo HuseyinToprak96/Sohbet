@@ -34,6 +34,10 @@
                 {
                     @Html.Action("Login")
                 }
+            else
+            {
+               @Html.Action("LoginOK")
+            }
 
             </div>
             <div class="navbar-collapse collapse">
@@ -43,31 +47,9 @@
         </div>
     </div>
     <div class="containerRender">
-        <div class="d-table-cell">
-            @foreach (User user in ((List<User>)TempData["Users"]))
-            {
-            <a href="/User/Face/id=@user.UserID"> <img src="@user.Photo" height="50" width="50"  /></a>
-            }
-        </div>
-        <hr />
-        <section>
-            <aside>
-                @if (Session["ID"] != null)
-                {
-
-                    <div class="userList">
-                        @foreach (User user in ((List<User>)TempData["Users"]))
-                        {
-                            <button class="btn-primary" value="@user.UserID">@user.UserName</button>
-                            <br />
-                        }
-                    </div>
-                }
-            </aside>
-            <article>
-                @RenderBody()
-            </article>
-        </section>
+ <div>
+     @RenderBody()
+ </div>
         <footer>
             <button type="button" class="btn btn-dark" id="liveToastBtn">Show live toast</button>
 
@@ -96,11 +78,7 @@
         background-color:beige;
         background:url('../../image/banner.jpg');
     }
-    section{
-        display:grid;
-       grid-template-columns:20% 80%;
-       grid-template:subgrid;
-    }
+   
     .title{
        font-size:30px;
        color:black;
@@ -114,10 +92,36 @@
     }
     function personMessage() {
         var btnUser = document.getElementsByClassName("btn-primary");
+        var div = document.getElementById("messages");
+        var u = document.getElementById("clickUser");
+        var send = document.getElementById("sendComp");
         for (var i = 0; i < btnUser.length; i++) {
             btnUser[i].addEventListener("click", function () {
                 factorySettings();
+                send.style.display = "block";
                 this.style.backgroundColor = "Red";
+                u.innerText = this.innerText;
+                alert(this.value);
+                var id = this.value;
+                div.innerHTML = "";
+                var xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        var myDatas=JSON.parse(xhr.responseText);
+                        let datas = Array.from(myDatas)
+                        for (var j = 0; j < datas.length; j++) {
+                            var mC = document.createElement("div");
+                            mC.innerText = datas[j].MessageContent;
+                            if (datas[j].SenderID == id)
+                                mC.className = "leftSender";
+                            else
+                                mC.className = "rightSender";
+                            div.appendChild(mC);
+                        }
+                    }
+                };
+                xhr.open("GET", "/Message/MessagesPerson", true);
+                xhr.send();
 
             });
         }
@@ -125,18 +129,52 @@
     function factorySettings() {
         var btnUser = document.getElementsByClassName("btn-primary");
         for (var i = 0; i < btnUser.length; i++) {
-            btnUser[i].className = "btn-primary";
+            btnUser[i].style.backgroundColor="blue";
         }
     }
-
+  
 </script>
 <style>
+    .leftSender {
+        margin-left: 100px;
+        border-radius: 15px;
+        border: 1px solid;
+        background-color: gold;
+        width: 250px;
+        height: 60px;
+        font-size: 20px;
+        padding-left: 30px;
+        padding-top: 10px;
+        color: darkblue;
+    }
+    .rightSender {
+        margin-left: 300px;
+        border-radius: 15px;
+        border: 1px solid;
+        background-color: blueviolet;
+        width: 250px;
+        height: 60px;
+        font-size: 20px;
+        padding-left:30px;
+        padding-top: 10px;
+        color: floralwhite;
+    }
     .userList{
         position:relative;
         height:max-content;
         width:max-content;
+        margin-top:70px;
     }
     .containerRender{
         background-color:antiquewhite;
+    }
+    li{
+        list-style-type:none;
+    }
+    a{
+        text-decoration:none;
+    }
+    #sendComp{
+        display:none;
     }
 </style>

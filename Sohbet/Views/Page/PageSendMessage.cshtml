@@ -1,0 +1,17 @@
+﻿<div id="sendComp">
+<div class="mb-3">
+    <textarea class="form-control" id="e"  rows="3"></textarea>
+</div>
+<div><input type="submit" class="buton btn-info" onclick="sendMessage()" id="send"/></div>
+    </div>
+<script>
+    function sendMessage() {
+        var btn = document.getElementById("send");
+        var txt = document.getElementById("e");
+        var div = document.getElementById("messages");
+            var message = document.createElement("div");
+            message.innerText = txt.value;
+            message.className = "rightSender";
+            div.appendChild(message);
+    }
+</script>

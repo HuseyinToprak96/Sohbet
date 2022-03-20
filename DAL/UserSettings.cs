@@ -10,14 +10,17 @@ namespace DAL
     {
         Context db = new Context();
 
-        public void Add(User t)
+        public void Add(User user)
         {
-            throw new NotImplementedException();
+               Models.User us = (user as Models.User) as Models.User;
+               db.Users.Add(us);
+               db.SaveChanges();
         }
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            db.Users.Remove(db.Users.Where(u => u.UserID == id).SingleOrDefault());
+            db.SaveChanges();
         }
 
         public User Find(int id)
@@ -25,52 +28,33 @@ namespace DAL
             throw new NotImplementedException();
         }
 
+        //public User Find(int id)
+        //{
+        //    Models.User user = db.Users.Where(u => u.UserID == id).SingleOrDefault();
+        //    User us =(user as User) as User;
+        //    return us;
+        //}
+
         public List<User> List()
         {
             List<User> List = db.Users.ToList() as List<User>;
               return List;
         }
 
-        public void Update(User t)
+        public void Update(User user)
         {
-            throw new NotImplementedException();
+            Models.User use = user as Models.User;
+            var result = db.Users.Where(u => u.UserID == use.UserID).SingleOrDefault();
+            result.UserName = use.UserName;
+            result.FirstName = use.FirstName;
+            result.LastName = use.LastName;
+            result.Password = use.Password;
+            result.Photo = use.Photo;
+            result.status = use.status;
+            result.PhoneNumber = use.PhoneNumber;
+            result.Approval = use.Approval;
+           db.SaveChanges();
         }
-        //public void DeleteUser(int id)
-        //{
-        //    db.Users.Remove(db.Users.Where(u => u.UserID == id).SingleOrDefault());
-        //    db.SaveChanges();
-        //}
-        //public User FindUser(int id)
-        //{
-        //    var user = db.Users.Where(u => u.UserID == id).SingleOrDefault();
-        //    User us = (user as User) as User;
-        //    return us;
-        //}
-        //public void SignUp(User user)
-        //{
-        //    Models.User us = (user as Models.User) as Models.User;
-        //    db.Users.Add(us);
-        //    db.SaveChanges();
-        //}
 
-        //public void UpdateUser(User use)
-        //{
-        //    Models.User user = use as Models.User;
-        //    var result = db.Users.Where(u => u.UserID == user.UserID).SingleOrDefault();
-        //    result.UserName = user.UserName;
-        //    result.FirstName = user.FirstName;
-        //    result.LastName = user.LastName;
-        //    result.Password = user.Password;
-        //    result.Photo = user.Photo;
-        //    result.status = user.status;
-        //    result.PhoneNumber = user.PhoneNumber;
-        //    result.Approval = user.Approval;
-        //    db.SaveChanges();
-        //}
-        //public List<User> Users()
-        //{
-        //    //List<User> List = db.Users.ToList() as List<User>;
-        //    return db.Users.ToList();
-        //}
     }
 }

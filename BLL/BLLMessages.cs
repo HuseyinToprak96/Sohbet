@@ -11,21 +11,23 @@ namespace BLL
    public class BLLMessages<Message> 
     {
         MessageSettings<Message> messageSettings = new MessageSettings<Message>();
+        Repository<Message> repository;
+        public BLLMessages()
+        {
+         repository = new Repository<Message>(messageSettings);
+        }
         public void Add(Message message)
         {
-           Repository<Message> repository = new Repository<Message>(messageSettings);
             repository.Add(message);
         }
         public void Delete(int id)
         {
-            Repository<Message> repository = new Repository<Message>(messageSettings);
             repository.Delete(id);
         }
 
         public List<Message> List()
         {
-            Repository<Message> repository = new Repository<Message>(messageSettings);
-            return repository.List() ;
+            return repository.List();
         }
     }
 }

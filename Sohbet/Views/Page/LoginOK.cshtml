@@ -1,0 +1,29 @@
+﻿@model ModelsView.VMLoginOK
+<div class=" align-content-sm-start" style="position:relative;left:200%;border-radius:10px;border:1px;">
+    <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+        <button type="button" class="btn btn-danger">My Profile</button>
+        <div class="btn-group" role="group">
+            <button id="btnGroupDrop1" type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                Messages
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                @foreach (var user in Model.Messages)
+                {
+                    <li><a class="dropdown-item" href="#">@user.Sender.UserName</a></li>
+}
+            </ul>
+        </div>
+        <button type="button" class="btn btn-danger">Settings</button>
+        <button type="button" class="btn btn-danger">
+            @Html.ActionLink("LogOut", "Out", new { @class = "btn btn-danger" })
+        </button>
+    </div>
+</div>
+<style>
+     a{
+        color:white;
+    }
+     a:hover{
+         color:white;
+     }
+</style>

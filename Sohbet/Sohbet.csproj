@@ -222,6 +222,8 @@
     <Content Include="Views\Page\Login.cshtml" />
     <Content Include="Views\Page\SignUp.cshtml" />
     <Content Include="Views\Page\SignUpPage.cshtml" />
+    <Content Include="Views\Page\LoginOK.cshtml" />
+    <Content Include="Views\Page\PageSendMessage.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -241,6 +243,10 @@
     <ProjectReference Include="..\DAL\DAL.csproj">
       <Project>{1f3028a1-38fa-4736-afe6-23509f35e9f9}</Project>
       <Name>DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ModelsView\ModelsView.csproj">
+      <Project>{d57c3c60-9beb-4861-ac32-56bd2c5f7d29}</Project>
+      <Name>ModelsView</Name>
     </ProjectReference>
     <ProjectReference Include="..\Models\Models.csproj">
       <Project>{03160711-8cd1-4fb6-9df4-7a970f202caa}</Project>

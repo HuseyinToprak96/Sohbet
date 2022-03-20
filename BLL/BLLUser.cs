@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using RepositoryLayer;
 using DAL;
+using ModelsView;
 namespace BLL
 {
    public class BLLUser<User>
@@ -37,5 +38,11 @@ namespace BLL
         {
            return repository.Find(id);
         }
+        //public VMLoginOK oK(int id)
+        //{
+        //    VMLoginOK vM = new VMLoginOK();
+            
+        //    return 
+        //}
     }
 }
