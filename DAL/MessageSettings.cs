@@ -8,8 +8,11 @@ namespace DAL
 {
    public class MessageSettings<Message>:Icrud<Message>
     {
-        Context db = new Context();
-
+        Context db;
+        public MessageSettings()
+        {
+        db = new Context();
+        }
         public void Add(Message message)
         {
             Models.Message mes = (message as Models.Message) as Models.Message;

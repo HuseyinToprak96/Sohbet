@@ -20,6 +20,8 @@
         <li class="nav-item">
             <a class="nav-link" href="/Page/Contact">Contact</a>
         </li>
+        <li id="id">@Session["ID"]</li>
+        <li id="id1"></li>
     </ul>
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
@@ -29,7 +31,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("İ'zdiv'acına Tali'bim", "Index", "Home", new { area = "" }, new { @class = "title" })
+                @Html.ActionLink("İs Div a Chene The lip am", "Index", "Home", new { area = "" }, new { @class = "title" })
                 @if (Session["ID"] == null)
                 {
                     @Html.Action("Login")
@@ -75,7 +77,7 @@
 </html>
 <style>
     body{
-        background-color:beige;
+       
         background:url('../../image/banner.jpg');
     }
    
@@ -84,6 +86,9 @@
        color:black;
        font-weight:bold;
        text-decoration:none;
+    }
+    #id, #id1{
+        display:none;
     }
 </style>
 <script>
@@ -95,14 +100,16 @@
         var div = document.getElementById("messages");
         var u = document.getElementById("clickUser");
         var send = document.getElementById("sendComp");
+        var id1 = document.getElementById("id1");
         for (var i = 0; i < btnUser.length; i++) {
             btnUser[i].addEventListener("click", function () {
                 factorySettings();
                 send.style.display = "block";
                 this.style.backgroundColor = "Red";
                 u.innerText = this.innerText;
-                alert(this.value);
                 var id = this.value;
+                id1.innerText = "";
+                id1.innerText = id;
                 div.innerHTML = "";
                 var xhr = new XMLHttpRequest();
                 xhr.onreadystatechange = function () {
@@ -111,12 +118,18 @@
                         let datas = Array.from(myDatas)
                         for (var j = 0; j < datas.length; j++) {
                             var mC = document.createElement("div");
-                            mC.innerText = datas[j].MessageContent;
-                            if (datas[j].SenderID == id)
+                            var x = document.getElementById("id");
+                            if (datas[j].SenderID == id && datas[j].RecipientID == x.innerText) {
                                 mC.className = "leftSender";
-                            else
+                                mC.innerText = datas[j].MessageContent;
+                                div.appendChild(mC);
+                            }
+                            else if (datas[j].RecipientID == id || datas[j].SenderID == x.innerText) {
                                 mC.className = "rightSender";
-                            div.appendChild(mC);
+                                mC.innerText = datas[j].MessageContent;
+                                div.appendChild(mC);
+                            }
+                            
                         }
                     }
                 };
@@ -136,7 +149,7 @@
 </script>
 <style>
     .leftSender {
-        margin-left: 100px;
+        margin-left: 50px;
         border-radius: 15px;
         border: 1px solid;
         background-color: gold;

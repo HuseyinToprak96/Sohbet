@@ -8,7 +8,7 @@ using Models;
 using System.Data.Entity;
 namespace DAL
 {
-    public class init:DropCreateDatabaseIfModelChanges<Context>
+    public class init:DropCreateDatabaseAlways<Context>
     {
         protected override void Seed(Context context)
         {

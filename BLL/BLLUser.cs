@@ -38,11 +38,5 @@ namespace BLL
         {
            return repository.Find(id);
         }
-        //public VMLoginOK oK(int id)
-        //{
-        //    VMLoginOK vM = new VMLoginOK();
-            
-        //    return 
-        //}
     }
 }

@@ -29,5 +29,13 @@ namespace BLL
         {
             return repository.List();
         }
+        public Message Find(int id)
+        {
+            return repository.Find(id);
+        }
+        public void Update(Message message)
+        {
+            repository.Update(message);
+        }
     }
 }

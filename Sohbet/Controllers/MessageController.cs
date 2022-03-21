@@ -24,15 +24,18 @@ namespace Sohbet.Controllers
         public JsonResult MessagesPerson(int? id)
         {
             int userID = Convert.ToInt32(Session["UserID"]);
-            // var messages = bLLMessages.List().Where(u => u.SenderID == userID && u.RecipientID == id || u.RecipientID == userID && u.SenderID == id).ToList();
-            var messages = context.Messages.ToList();
-            messages.Add(new Message { MessageContent = "Selam", Seen=false, SenderID=2, RecipientID=1, Date=DateTime.Now });
-            messages.Add(new Message { MessageContent = "Selam", Seen = false, SenderID = 1, RecipientID = 2, Date = DateTime.Now });
-            return Json(messages.OrderByDescending(m=>m.MessageID),JsonRequestBehavior.AllowGet);
+            var messages = bLLMessages.List();
+            return Json(messages.OrderByDescending(m => m.MessageID), JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
         public ActionResult SendMessage(string mesaj)
         {
+            Message message = new Message();
+            message.SenderID = Convert.ToInt32(Session["ID"]);
+            message.MessageContent = mesaj;
+            message.Date = DateTime.Now;
+            message.Seen = false;
+            bLLMessages.Add(message);
             return View();
         }
         [HttpPost]
