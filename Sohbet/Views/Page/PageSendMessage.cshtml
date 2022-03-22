@@ -1,9 +1,14 @@
-﻿<div id="sendComp">
+﻿@model Models.Message
+<div id="sendComp">
+    @using (Html.BeginForm("SendMessage", "Message", FormMethod.Get)) {
+    <div class="mb-3" id="noSeen">
+        @Html.TextBoxFor(m=>m.RecipientID, new { @id = "id1" })
+    </div>  
 <div class="mb-3">
-    <textarea class="form-control" id="e" name="msj"  rows="3"></textarea>
+    @Html.TextBoxFor(m=>m.MessageContent)
 </div>
-<div><input type="submit" class="buton btn-info" formaction="SendMessage" onclick="sendMessage()" id="send"/></div>
-    </div>
+<div><input type="submit" class="buton btn-info" onclick="sendMessage()" id="send"/></div>
+    } </div> 
 <script>
     function sendMessage() {
         var btn = document.getElementById("send");
@@ -11,17 +16,12 @@
         var div = document.getElementById("messages");
         var id1 = document.getElementById("id");
         var id2 = document.getElementById("id1");
-            var message = document.createElement("div");
+        var message = document.createElement("div");
+        if (txt.value != "") {
             message.innerText = txt.value;
-            message.className = "rightSender";
-        div.appendChild(message);
-        var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState == 4 && xhr.status == 200) {
-
-            }
-        };
-        xhr.open("GET", "api/Messages/", true);
-        xhr.send();
+        message.className = "rightSender";
+        txt.value = "";
+            div.appendChild(message);
+        }
     }
 </script>

@@ -20,8 +20,6 @@
         <li class="nav-item">
             <a class="nav-link" href="/Page/Contact">Contact</a>
         </li>
-        <li id="id">@Session["ID"]</li>
-        <li id="id1"></li>
     </ul>
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
@@ -76,9 +74,11 @@
 </body>
 </html>
 <style>
-    body{
-       
-        background:url('../../image/banner.jpg');
+    #linkClear{
+        color:black;
+    }
+    body {
+        background: url('../../image/banner.jpg');
     }
    
     .title{
@@ -101,20 +101,26 @@
         var u = document.getElementById("clickUser");
         var send = document.getElementById("sendComp");
         var id1 = document.getElementById("id1");
+        var allClear = document.getElementById("allClear");
+        var link = document.createElement("a");
+        link.id = "linkClear";
         for (var i = 0; i < btnUser.length; i++) {
             btnUser[i].addEventListener("click", function () {
+                link.innerText = "All Clear";
+                link.href = "/Message/Clear/" + this.value;
+                allClear.appendChild(link);
                 factorySettings();
                 send.style.display = "block";
                 this.style.backgroundColor = "Red";
                 u.innerText = this.innerText;
                 var id = this.value;
-                id1.innerText = "";
-                id1.innerText = id;
+                id1.value = "";
+                id1.value = id;
                 div.innerHTML = "";
                 var xhr = new XMLHttpRequest();
                 xhr.onreadystatechange = function () {
                     if (xhr.readyState == 4 && xhr.status == 200) {
-                        var myDatas=JSON.parse(xhr.responseText);
+                        var myDatas = JSON.parse(xhr.responseText);
                         let datas = Array.from(myDatas)
                         for (var j = 0; j < datas.length; j++) {
                             var mC = document.createElement("div");
@@ -129,7 +135,7 @@
                                 mC.innerText = datas[j].MessageContent;
                                 div.appendChild(mC);
                             }
-                            
+
                         }
                     }
                 };
@@ -142,10 +148,10 @@
     function factorySettings() {
         var btnUser = document.getElementsByClassName("btn-primary");
         for (var i = 0; i < btnUser.length; i++) {
-            btnUser[i].style.backgroundColor="blue";
+            btnUser[i].style.backgroundColor = "blue";
         }
     }
-  
+
 </script>
 <style>
     .leftSender {

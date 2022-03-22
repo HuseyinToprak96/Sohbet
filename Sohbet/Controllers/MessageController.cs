@@ -12,6 +12,7 @@ namespace Sohbet.Controllers
     {
         BLLMessages<Message> bLLMessages = new BLLMessages<Message>();
        BLLUser<User> bLLUser = new BLLUser<User>();
+        MessageSettings<Message> Messages = new MessageSettings<Message>();
         Context context = new Context();
         // GET: Message
         public ActionResult Index()
@@ -27,21 +28,23 @@ namespace Sohbet.Controllers
             var messages = bLLMessages.List();
             return Json(messages.OrderByDescending(m => m.MessageID), JsonRequestBehavior.AllowGet);
         }
-        [HttpPost]
-        public ActionResult SendMessage(string mesaj)
+        public ActionResult SendMessage(Message message)
         {
-            Message message = new Message();
-            message.SenderID = Convert.ToInt32(Session["ID"]);
-            message.MessageContent = mesaj;
-            message.Date = DateTime.Now;
+            int id = Convert.ToInt32(Session["ID"]);
+            message.SenderID = id;
             message.Seen = false;
+            message.Date = DateTime.Now;
             bLLMessages.Add(message);
-            return View();
+            return RedirectToAction("../Page/Home");
         }
-        [HttpPost]
-        public ActionResult DeletePersonMessages(int id)
+        public ActionResult Clear(int id)
         {
-            return View();
+            int userID = Convert.ToInt32(Session["ID"]);
+            var list = context.Messages.Where(m => m.SenderID == id && m.RecipientID == userID || m.SenderID == userID && m.RecipientID == id).ToList();
+            foreach (var item in list)
+            context.Messages.Remove(item);
+            context.SaveChanges();
+            return RedirectToAction("../Page/Home");
         }
         [HttpPost]
         public ActionResult DeleteMessage()

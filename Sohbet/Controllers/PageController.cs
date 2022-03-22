@@ -12,6 +12,7 @@ namespace Sohbet.Controllers
 {
     public class PageController : Controller
     {
+
         BLLUser<User> setting = new BLLUser<User>();
         BLLMessages<Message> messages = new BLLMessages<Message>();
         // GET: Page

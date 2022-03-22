@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 using DAL;
 using Models;
 using RepositoryLayer;
+using DAL;
 namespace BLL
 {
    public class BLLMessages<Message> 
     {
         MessageSettings<Message> messageSettings = new MessageSettings<Message>();
+        
         Repository<Message> repository;
         public BLLMessages()
         {

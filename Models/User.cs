@@ -18,7 +18,7 @@ namespace Models
         public string Mail { get; set; }
         public bool Approval { get; set; }
         public bool status { get; set; }
-        //NAV
+        //NAV( Önüne virtual yazmak LazyLoading)
         public virtual List<Message> messages { get; set; }
     }
 }
